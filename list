@@ -1,0 +1,54 @@
+import React, { useState } from "react";
+
+const Todo = ({ todo }) => <div className="todo">{todo.text}</div>;
+
+function App() {
+  const [newItem, setNewItem] = useState("");
+  const [todos, setTodos] = useState([]);
+  
+  const handleClick = e => {
+    const list = [...todos, newItem]
+    e.preventDefault();
+      setTodos(list)
+  }
+
+  /* function addTodo(e) {
+    let currentTodos = todos;
+
+    setTodos(...currentTodos, newItem);
+
+  } */
+
+  return (
+    <div>
+      <form className="App">
+      <input
+        className="spacebar"
+        type="text"
+        placeholder="Enter your to-do here"
+        value={newItem}
+        onChange={e => setNewItem(e.target.value)}
+      />
+      <button className="button" 
+              type="submit" 
+              onClick={(e) => handleClick(e)}> 
+      </button>
+      </form>
+      <div className="app">
+      <div className="todo-list">
+        {todos.map((todos, index) => (
+          <button
+            key={index}
+            index={index}>
+            {todos}
+          </button>
+        ))}
+        
+      </div>
+    </div>
+    </div>
+      
+  );
+} 
+
+export default App;
