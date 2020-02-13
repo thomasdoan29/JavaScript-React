@@ -1,0 +1,41 @@
+import React, { useState } from "react";
+
+
+
+function App() {
+  const [newItem, setNewItem] = useState("");
+  const [todos, setTodos] = useState([]);
+  
+  const handleClick = e => {
+    const list = [...todos, newItem]
+    e.preventDefault();
+      setTodos(list)
+  }
+
+  function addTodo(e) {
+    let currentTodos = todos;
+
+    setTodos(...currentTodos, newItem);
+
+  }
+
+  return (
+    
+      <form className="App">
+      <input
+        className="spacebar"
+        type="text"
+        placeholder="Enter your to-do here"
+        value={newItem}
+        onChange={e => setNewItem(e.target.value)}
+      />
+      <button className="button" 
+              type="submit" 
+              onClick={(e) => handleClick(e)}> 
+      </button>
+      </form>
+      
+  );
+} 
+
+export default App;
