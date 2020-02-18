@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card'
 
-const Todo = ({ todo }) => <div className="todo">{todo.text}</div>;
+//const Todo = ({ todo }) => <div className="todo">{todo.text}</div>;
 
 function App() {
   const [newItem, setNewItem] = useState("");
@@ -9,8 +11,27 @@ function App() {
   const handleClick = e => {
     const list = [...todos, newItem]
     e.preventDefault();
-      setTodos(list)
+      setTodos(list);
+      setNewItem("");
   }
+
+  const handleDelete = (e, index) => {
+    const list = [...todos];
+    list.splice(index, 1);
+    setTodos(list);  
+    }
+
+
+  const style = {
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    borderRadius: 3,
+    border: 0,
+    color: 'white',
+    height: 23,
+    padding: '0 30px',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  };
+
 
   /* function addTodo(e) {
     let currentTodos = todos;
@@ -21,6 +42,7 @@ function App() {
 
   return (
     <div>
+      
       <form className="App">
       <input
         className="spacebar"
@@ -29,24 +51,37 @@ function App() {
         value={newItem}
         onChange={e => setNewItem(e.target.value)}
       />
-      <button className="button" 
+      <Button className="button" 
               type="submit" 
-              onClick={(e) => handleClick(e)}> 
-      </button>
+              onClick={(e) => handleClick(e)}
+              size="large"
+              style={style}> DOPE
+      </Button>
       </form>
-      <div className="app">
+      <ul className="app">
+      <Card>
       <div className="todo-list">
         {todos.map((todos, index) => (
-          <button
-            key={index}
-            index={index}>
-            {todos}
-          </button>
+          <ul>
+            <li>
+              <Button
+                key={index}
+                index={index}
+                onClick={(e) => handleDelete(e, index)}
+                style={style}>
+              </Button>
+              {todos}
+            </li>
+            
+          </ul>
+          
         ))}
         
       </div>
-    </div>
-    </div>
+      </Card>
+      </ul>
+      
+      </div>
       
   );
 } 
